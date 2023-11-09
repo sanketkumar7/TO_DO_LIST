@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Log In / Sign Up</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'><link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										{%if request.COOKIES.msg_info %}
+										<p style="color: red;font-size: larger;">{{ request.COOKIES.msg_info }}</p>
+										{% endif %}
+										{%if request.COOKIES.msg_alert %}
+										<p style="color: green;font-size: larger;">{{ request.COOKIES.msg_alert }}</p>
+										{% endif %}
+										<form method="POST" action="{% url 'app1:sign_in' %}">
+											{% csrf_token %}
+											<div class="section text-center">
+												<h4 class="mb-4 pb-3">Log In</h4>
+												<div class="form-group">
+													
+													<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+													<i class="input-icon uil uil-at"></i>
+												</div>	
+												<div class="form-group mt-2">
+													<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+												<input type="submit" name="signin" value="Sign In" class="btn mt-4">
+												<!-- <a href="{% url 'app1:sign_in' %}" name='signin' value='submit' class="btn mt-4">submit</a> -->
+												<p class="mb-0 mt-4 text-center"><a href="" class="link">Forgot your password?</a></p>
+											</div>
+										</form>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="center-wrap">
+										<form method="POST" action="{% url 'app1:sign_in' %}">
+											{% csrf_token %}
+											<div class="section text-center">
+												<h4 class="mb-4 pb-3">Sign Up</h4>
+												<div class="form-group">
+													<input type="text" name="logname" class="form-style" value="{{request.COOKIES.name}}" placeholder="Your Full Name" id="logname" autocomplete="off" required>
+													<i class="input-icon uil uil-user"></i>
+													{% if request.COOKIES.name_error %}
+													<p style="color: red;">{{request.COOKIES.name_error}}</p>
+													{%endif%}
+												</div>	
+												<div class="form-group mt-2">
+													<input type="email" name="logemail" class="form-style" value='{{request.COOKIES.email}}'placeholder="Your Email" id="logemail" autocomplete="off" required>
+													<i class="input-icon uil uil-at"></i>
+													{% if request.COOKIES.email_error %}
+													<p style="color: red;">{{request.COOKIES.email_error}}</p>
+													{%endif%}
+												</div>	
+												<div class="form-group mt-2">
+													<input type="password" name="logpass" value="{{request.COOKIES.password}}" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" required>
+													<i class="input-icon uil uil-lock-alt"></i>
+													{% if request.COOKIES.password_error %}
+													<p style="color: red;">{{request.COOKIES.password_error}}</p>
+													{% endif %}
+												</div>
+												<input type="submit" name="register" value="Sign Up" class="btn mt-4" >
+											</div>
+										</form>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
+	</div>
+<!-- partial -->
+  
+</body>
+</html>

@@ -1,0 +1,12 @@
+{%if tasks%}
+    {%for each in tasks%}
+    <tr>
+    <td>{{forloop.counter}}</td>
+    <td style="{%if each.completed_status %}text-decoration: line-through;{%endif%}" onclick="ajax_request_to_change_status(this,'{{ each.pk }}','{{ each.completed_status }}');">{{each.title}}</td>
+    <td class="text-center">
+        <a href="{% url 'app1:update_task' each.pk %}"><button class="btn btn-warning">Edit</button></a>
+        <a href="{% url 'app1:delete_task' each.pk %}"><button class="btn btn-danger">Delete</button></a>
+    </td>
+    </tr>
+    {% endfor %}
+{%endif%}
